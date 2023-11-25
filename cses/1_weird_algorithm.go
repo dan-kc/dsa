@@ -12,6 +12,5 @@ func WeirdAlgorithm(n int) []int {
 		}
 	}
 
-	result = append(result, n)
-	return result
+	return append(result, n)
 }
