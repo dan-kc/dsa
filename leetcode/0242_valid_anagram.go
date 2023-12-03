@@ -30,8 +30,10 @@ func ValidAnagramAlt(s string, t string) bool {
 	for idx := 0; idx < len(s); idx++ {
 		freq[s[idx]-'a']++
 		freq[t[idx]-'a']--
+		// We increment freq for characters of s and decrement t
 	}
 	for idx := 0; idx < len(freq); idx++ {
+		// We now check if all of the map values equal zero, as they should if we have an anagram.
 		if freq[idx] != 0 {
 			return false
 		}

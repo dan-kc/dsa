@@ -13,14 +13,12 @@ func TestValidAnagram(t *testing.T) {
 		input2   string
 		expected bool
 	}{
-		//5 abcâ
-		//5 abcde
 		{"anagram", "nagaram", true},
 		{"rat", "car", false},
 		{"abcâ", "abcde", false},
 	}
 	for _, v := range testCases {
-		result := leetcode.ValidAnagram(v.input1, v.input2)
+		result := leetcode.ValidAnagramAlt(v.input1, v.input2)
 		if !reflect.DeepEqual(result, v.expected) {
 			t.Errorf("For inputs %s and %s,  expected %v, but got %v", v.input1, v.input2, v.expected, result)
 		}
