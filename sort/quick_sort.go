@@ -19,10 +19,10 @@ func partition(arr *[]int, low, high int) int {
 
 	for i < j {
 		for (*arr)[i] <= p {
-			i++
+			i++ // the first element that is greater than p
 		}
 		for (*arr)[j] > p {
-			j--
+			j-- // the first element that is less than or equal to p
 		}
 		if i < j {
 			(*arr)[i], (*arr)[j] = (*arr)[j], (*arr)[i]
