@@ -1,5 +1,10 @@
 package sort
 
+import (
+	"reflect"
+	"testing"
+)
+
 func QuickSort(arr *[]int) {
 	sort(arr, 0, len(*arr)-1)
 }
@@ -31,4 +36,13 @@ func partition(arr *[]int, low, high int) int {
 
 	(*arr)[low], (*arr)[j] = (*arr)[j], (*arr)[low]
 	return j
+}
+
+func TestQuickSort(t *testing.T) {
+	a := &[]int{2, 3, 1, 5}
+	expected := []int{1, 2, 3, 5}
+	sort.QuickSort(a)
+	if !reflect.DeepEqual(*a, expected) {
+		t.Errorf("For inputs %d, expected %v, but got %v", a, expected, a)
+	}
 }

@@ -1,5 +1,10 @@
 package leetcode
 
+import (
+	"reflect"
+	"testing"
+)
+
 func ValidAnagram(s, t string) bool {
 	if len(s) != len(t) {
 		return false
@@ -39,4 +44,22 @@ func ValidAnagramAlt(s string, t string) bool {
 		}
 	}
 	return true
+}
+
+func TestValidAnagram(t *testing.T) {
+	testCases := []struct {
+		input1   string
+		input2   string
+		expected bool
+	}{
+		{"anagram", "nagaram", true},
+		{"rat", "car", false},
+		{"abcâ", "abcde", false},
+	}
+	for _, v := range testCases {
+		result := leetcode.ValidAnagramAlt(v.input1, v.input2)
+		if !reflect.DeepEqual(result, v.expected) {
+			t.Errorf("For inputs %s and %s,  expected %v, but got %v", v.input1, v.input2, v.expected, result)
+		}
+	}
 }
