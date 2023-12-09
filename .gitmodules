@@ -1,0 +1,9 @@
+[submodule "TheAlgorithms/Go"]
+	path = TheAlgorithms/Go
+	url = git@github.com:TheAlgorithms/Go.git
+[submodule "TheAlgorithms/Rust"]
+	path = TheAlgorithms/Rust
+	url = git@github.com:TheAlgorithms/Rust.git
+[submodule "TheAlgorithms/Algorithms-Explanation"]
+	path = TheAlgorithms/Algorithms-Explanation
+	url = git@github.com:TheAlgorithms/Algorithms-Explanation.git
