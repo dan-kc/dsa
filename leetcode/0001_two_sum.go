@@ -1,18 +1,5 @@
-package leetcode
-
-// Time: O(n^2)
-// Space: O(1)
-func TwoSumAlt(nums []int, target int) (int, int) {
-	for i := 0; i < len(nums)-1; i++ {
-		for j := i + 1; j < len(nums); j++ {
-			if nums[i]+nums[j] == target {
-				return i, j
-			}
-		}
-	}
-	return 0, 0
-}
-
+// Time: O(n)
+// Space O(n)
 func TwoSum(nums []int, target int) (int, int) {
 	m := make(map[int]int)
 	for i := 0; i < len(nums)-1; i++ {
@@ -26,3 +13,16 @@ func TwoSum(nums []int, target int) (int, int) {
 	}
 	return 0, 0
 }
+
+// Time: O(n^2)
+// Space: O(1)
+// func TwoSum(nums []int, target int) (int, int) {
+// 	for i := 0; i < len(nums)-1; i++ {
+// 		for j := i + 1; j < len(nums); j++ {
+// 			if nums[i]+nums[j] == target {
+// 				return i, j
+// 			}
+// 		}
+// 	}
+// 	return 0, 0
+// }
