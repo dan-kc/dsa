@@ -1,5 +1,3 @@
-package cses
-
 import (
 	"reflect"
 	"testing"
