@@ -1,3 +1,6 @@
 [submodule "cphb"]
 	path = cphb
 	url = git@github.com:pllk/cphb.git
+[submodule "TheAlgorithms"]
+	path = TheAlgorithms
+	url = git@github.com:TheAlgorithms/Go.git
