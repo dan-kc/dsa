@@ -1,0 +1,3 @@
+[submodule "cphb"]
+	path = cphb
+	url = git@github.com:pllk/cphb.git
