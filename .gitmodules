@@ -7,3 +7,6 @@
 [submodule "TheAlgorithms/Algorithms-Explanation"]
 	path = TheAlgorithms/Algorithms-Explanation
 	url = git@github.com:TheAlgorithms/Algorithms-Explanation.git
+[submodule "TheAlgorithms/Lua"]
+	path = TheAlgorithms/Lua
+	url = git@github.com:TheAlgorithms/Lua.git
