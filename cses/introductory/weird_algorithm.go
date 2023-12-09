@@ -1,8 +1,10 @@
-package cses
+import (
+	"reflect"
+	"testing"
+)
 
 func WeirdAlgorithm(n int) []int {
 	var result []int
-
 	for n != 1 {
 		result = append(result, n)
 		if n%2 == 0 {
