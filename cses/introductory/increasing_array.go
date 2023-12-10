@@ -1,10 +1,22 @@
-func IncreasingArray(n int, a []int) int {
+package main
+
+import "fmt"
+
+// Time O(n)
+// Space O(n)
+func main() {
+	var n int
+	fmt.Scan(&n)
+	arr := make([]int, n)
+	for i := 0; i < n; i++ {
+		fmt.Scan(&arr[i])
+	}
 	var moves int
 	for i := 1; i < n; i++ {
-		if a[i] < a[i-1] {
-			moves = moves + a[i-1] - a[i]
-			a[i] = a[i-1]
+		if arr[i] < arr[i-1] {
+			moves = moves + arr[i-1] - arr[i]
+			arr[i] = arr[i-1]
 		}
 	}
-	return moves
+	fmt.Println(moves)
 }
