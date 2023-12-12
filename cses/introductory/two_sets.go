@@ -5,40 +5,39 @@ import "fmt"
 func main() {
 	var n int
 	fmt.Scan(&n)
+
 	sum := n * (n + 1) / 2
-	if sum%2 != 0 {
-		fmt.Println("NO")
+
+	if sum%2 > 0 {
+		fmt.Println("NO SOLUTION")
 		return
 	}
-	fmt.Println("YES")
-	var arr1 []int
-	var arr2 []int
-	if n%2 == 0 {
-		arr1, arr2 = algo(n, 1)
-	} else {
-		arr1, arr2 = algo(n, 4)
-	}
-	fmt.Println(len(arr1))
-	fmt.Println(arr1)
-	fmt.Println(len(arr2))
-	fmt.Println(arr2)
-}
 
-func algo(end, start int) ([]int, []int) {
-	var arr1 []int
-	var arr2 []int
-	arr1 = append(arr1, 1, 2)
-	arr2 = append(arr2, 3)
-	left := true
-	for start < end {
-		if left {
-			arr1 = append(arr1, start, end)
-		} else {
-			arr2 = append(arr2, start, end)
+	var left, right []int
+	if n%4 == 0 {
+		for i := 1; i < n+1; i += 4 {
+			left = append(left, i, i+3)
+			right = append(right, i+1, i+2)
 		}
-		start++
-		end--
-		left = !left
+	} else {
+		left = append(left, 1, 2)
+		right = append(right, 3)
+		for i := 4; i < n+1; i += 4 {
+			left = append(left, i, i+3)
+			right = append(right, i+1, i+2)
+		}
 	}
-	return arr1, arr2
+
+	fmt.Println("YES")
+
+	fmt.Println(len(left))
+	for i := 0; i < len(left); i++ {
+		fmt.Printf("%d ", left[i])
+	}
+
+	fmt.Println()
+	fmt.Println(len(right))
+	for i := 0; i < len(right); i++ {
+		fmt.Printf("%d ", right[i])
+	}
 }

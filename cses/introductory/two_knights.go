@@ -1,8 +1,15 @@
-func TwoKnights(n int) (res []int) {
-	res = append(res, 0)
+package main
+
+import "fmt"
+
+func main() {
+	var n int
+	fmt.Scan(&n)
+	fmt.Println(0)
 	for k := 2; k < n+1; k++ {
-		totalMoves := k * k * (k*k - 1) / 2
-		attackMoves := (k - 2) * (k - 1)
-		res = res.append(res, totalMoves-(4*attackMoves))
+		// we kinda divide both by 2 both due to double counting
+		total := k * k * ((k * k) - 1) / 2
+		attacks := 4 * 2 * (k - 1) * (k - 2) / 2
+		fmt.Println(total - attacks)
 	}
 }
