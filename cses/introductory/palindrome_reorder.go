@@ -1,36 +1,46 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	var str string
-	fmt.Scan(&str)
+	var input string
+	fmt.Scan(&input)
+
+	// count
 	count := make(map[rune]int)
-	for _, v := range str {
-		count[v]++
+	for _, r := range input {
+		count[r]++
 	}
-	var odds []rune
-	for key, v := range count {
-		if v%2 != 0 {
-			odds = append(odds, key)
+
+	// add odds first
+	var res []rune
+	var oddCount int
+	for k, v := range count {
+		if v%2 > 0 {
+			oddCount++
+			for i := 0; i < v; i++ {
+				res = append(res, k)
+			}
+			count[k] = 0
 		}
 	}
-	if len(odds) > 1 {
-		fmt.Print("NO SOLUTION")
+
+	// no solution
+	if oddCount > 1 {
+		fmt.Println("NO SOLUTION")
 		return
 	}
-	var ans string
-	if len(odds) == 1 {
-		ans = string(odds[0])
-	}
-	for key, v := range count {
-		if v%2 == 0 {
-			for i := 0; i < v/2; i++ {
-				ans = string(key) + ans + string(key)
-			}
+
+	// add rest
+	for k, v := range count {
+		for i := 0; i < v; i += 2 {
+			res = append(res, k)
+			res = append([]rune{k}, res...)
 		}
 	}
-	fmt.Println(ans)
+
+	// print
+	for _, r := range res {
+		fmt.Printf("%c", r)
+	}
 }
