@@ -11,25 +11,29 @@ func main() {
 	for i := 0; i < len(ans); i++ {
 		fmt.Println()
 		for j := 0; j < n; j++ {
-			fmt.Printf("%b", ans[i][j])
+			if ans[i][j] {
+				fmt.Printf("%d", 1)
+				continue
+			}
+			fmt.Printf("%d", 0)
 		}
 	}
 }
 
-func solve(n int) [][]byte {
+func solve(n int) [][]bool {
 	if n == 1 {
-		return [][]byte{{0}, {1}}
+		return [][]bool{{false}, {true}}
 	}
 	prev := solve(n - 1)
 
-	next := [][]byte{}
+	next := [][]bool{}
 	len := len(prev)
 	for i := 0; i < len; i++ {
-		entry := append([]byte{0}, prev[i]...)
+		entry := append([]bool{false}, prev[i]...)
 		next = append(next, entry)
 	}
 	for i := len - 1; i >= 0; i-- {
-		entry := append([]byte{1}, prev[i]...)
+		entry := append([]bool{true}, prev[i]...)
 		next = append(next, entry)
 	}
 	return next
