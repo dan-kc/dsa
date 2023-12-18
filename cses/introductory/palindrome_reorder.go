@@ -5,42 +5,37 @@ import "fmt"
 func main() {
 	var input string
 	fmt.Scan(&input)
-
-	// count
-	count := make(map[rune]int)
-	for _, r := range input {
-		count[r]++
+	length := len(input)
+	countMap := make(map[byte]int)
+	for i := 0; i < length; i++ {
+		countMap[input[i]]++
 	}
 
-	// add odds first
-	var res []rune
-	var oddCount int
-	for k, v := range count {
+	oddsCount := make(map[byte]int)
+	evensCount := make(map[byte]int)
+	for k, v := range countMap {
 		if v%2 > 0 {
-			oddCount++
-			for i := 0; i < v; i++ {
-				res = append(res, k)
-			}
-			count[k] = 0
+			oddsCount[k] = v
+			continue
 		}
+		evensCount[k] = v
 	}
-
-	// no solution
-	if oddCount > 1 {
-		fmt.Println("NO SOLUTION")
+	if len(oddsCount) > 1 {
+		fmt.Print("NO SOLUTION")
 		return
 	}
 
-	// add rest
-	for k, v := range count {
-		for i := 0; i < v; i += 2 {
+	var res = make([]byte, length)
+	for k, v := range oddsCount { // should only be one anyway
+		for i := 0; i < v; i++ {
 			res = append(res, k)
-			res = append([]rune{k}, res...)
 		}
 	}
-
-	// print
-	for _, r := range res {
-		fmt.Printf("%c", r)
+	for k, v := range evensCount {
+		for i := 0; i < v/2; i++ {
+			res = append([]byte{k}, res...) // prepend
+			res = append(res, k)
+		}
 	}
+	fmt.Print(string(res))
 }
