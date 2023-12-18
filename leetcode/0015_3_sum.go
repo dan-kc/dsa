@@ -1,0 +1,46 @@
+package main
+
+import (
+	"fmt"
+	"slices"
+)
+
+func main() {
+	input := []int{-3, -3, 1, 2, 3, 4}
+	fmt.Print(threeSum(input))
+}
+
+func threeSum(nums []int) [][]int {
+	n := len(nums)
+
+	slices.Sort(nums)
+
+	var result [][]int
+	for num1Idx := 0; num1Idx < n-2; num1Idx++ {
+		// Skip all duplicates from left
+		// num1Idx>0 ensures this check is made only from 2nd element onwards
+		if num1Idx > 0 && nums[num1Idx] == nums[num1Idx-1] {
+			continue
+		}
+
+		num2Idx := num1Idx + 1
+		num3Idx := n - 1
+		for num2Idx < num3Idx {
+			sum := nums[num2Idx] + nums[num3Idx] + nums[num1Idx]
+			if sum == 0 {
+				result = append(result, []int{nums[num1Idx], nums[num2Idx], nums[num3Idx]})
+				num3Idx--
+
+				// Skip all duplicates from right
+				for num2Idx < num3Idx && nums[num3Idx] == nums[num3Idx+1] {
+					num3Idx--
+				}
+			} else if sum > 0 {
+				num3Idx--
+			} else {
+				num2Idx++
+			}
+		}
+	}
+	return result
+}
