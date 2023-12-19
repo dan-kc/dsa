@@ -1,10 +1,18 @@
-package sort
+package main
 
-func BubbleSort(a *[]int) {
-	for i := 0; i < len(*a)-1; i++ {
-		for j := 0; j < j-i-1; j++ {
-			if (*a)[j] > (*a)[j+1] {
-				(*a)[j+1], (*a)[j] = (*a)[j], (*a)[j+1]
+import "fmt"
+
+func main() {
+	test := []int{1, 3, 6, 4, 2}
+	sort(test)
+	fmt.Println(test)
+}
+
+func sort(arr []int) {
+	for j := 0; j < len(arr)-1; j++ {
+		for i := 0; i < len(arr)-1; i++ {
+			if arr[i] > arr[i+1] {
+				arr[i], arr[i+1] = arr[i+1], arr[i]
 			}
 		}
 	}
