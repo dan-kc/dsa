@@ -1,17 +1,16 @@
 // Time: O(n)
 // Space O(n)
-func TwoSum(nums []int, target int) (int, int) {
+package main
+
+func twoSum(nums []int, target int) []int {
 	m := make(map[int]int)
-	for i := 0; i < len(nums)-1; i++ {
-		m[nums[i]] = i
-	}
-	for i := 0; i < len(nums)-1; i++ {
-		s := target - nums[i]
-		if m[s] != 0 {
-			return i, m[s]
+	for idx, num := range nums {
+		if val, found := m[target-num]; found {
+			return []int{val, idx}
 		}
+		m[num] = idx
 	}
-	return 0, 0
+	return nil
 }
 
 // Time: O(n^2)
