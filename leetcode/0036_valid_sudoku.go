@@ -4,84 +4,83 @@ import (
 	"fmt"
 )
 
-func isValidSudoku(board [][]byte) bool {
-	// Check rows
+func main() {
+	input := [9][9]byte{
+		[9]byte{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+		[9]byte{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+		[9]byte{'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+		[9]byte{'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+		[9]byte{'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+		[9]byte{'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+		[9]byte{'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+		[9]byte{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+		[9]byte{'.', '.', '.', '.', '8', '.', '.', '7', '9'},
+	}
+	fmt.Println(solve(input))
+}
+
+func solve(input [9][9]byte) bool {
+	// check rows
 	for i := 0; i < 9; i++ {
-		if !isValidGroup(board[i]) {
+		if !isValid(input[i]) {
 			return false
 		}
 	}
 
-	// Check columns
+	// make cols array
+	var cols [9][9]byte
 	for i := 0; i < 9; i++ {
-		column := make([]byte, 9)
 		for j := 0; j < 9; j++ {
-			column[j] = board[j][i]
+			cols[i][j] = input[j][i]
 		}
-		if !isValidGroup(column) {
+	}
+
+	// check cols
+	for i := 0; i < 9; i++ {
+		if !isValid(cols[i]) {
 			return false
 		}
 	}
 
-	// Check 3x3 sub-boxes
+	// make squares
+	var squares [9][9]byte
+	squaresIdx := 0
 	for i := 0; i < 9; i += 3 {
 		for j := 0; j < 9; j += 3 {
-			// we're at the start of a 3x3 box
-			subbox := make([]byte, 9)
-			index := 0
-			for x := i; x < i+3; x++ {
-				for y := j; y < j+3; y++ {
-					subbox[index] = board[x][y]
-					index++
+			elemIdx := 0
+			square := [9]byte{}
+			for y := i; y < i+3; y++ {
+				for x := j; x < j+3; x++ {
+					square[elemIdx] = input[y][x]
+					elemIdx++
 				}
 			}
-			if !isValidGroup(subbox) {
-				return false
-			}
+			squares[squaresIdx] = square
+			squaresIdx++
+		}
+	}
+
+	// check squares
+	for i := 0; i < 9; i++ {
+		if !isValid(squares[i]) {
+			return false
 		}
 	}
 
 	return true
 }
 
-func isValidGroup(unit []byte) bool {
-	seen := make(map[byte]bool)
-	for _, digit := range unit {
-		if digit != '.' {
-			if seen[digit] {
-				return false
-			}
-			seen[digit] = true
+func isValid(input [9]byte) bool {
+	m := make(map[byte]int)
+	for i := 0; i < 9; i++ {
+		if input[i] == '.' {
+			continue
 		}
+		if m[input[i]] > 0 {
+			return false
+		}
+		m[input[i]]++
 	}
+
 	return true
-}
-
-func main() {
-	board1 := [][]byte{
-		{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
-		{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-		{'.', '9', '8', '.', '.', '.', '.', '6', '.'},
-		{'8', '.', '.', '.', '6', '.', '.', '.', '3'},
-		{'4', '.', '.', '8', '.', '3', '.', '.', '1'},
-		{'7', '.', '.', '.', '2', '.', '.', '.', '6'},
-		{'.', '6', '.', '.', '.', '.', '2', '8', '.'},
-		{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
-		{'.', '.', '.', '.', '8', '.', '.', '7', '9'},
-	}
-
-	board2 := [][]byte{
-		{'8', '3', '.', '.', '7', '.', '.', '.', '.'},
-		{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-		{'.', '9', '8', '.', '.', '.', '.', '6', '.'},
-		{'8', '.', '.', '.', '6', '.', '.', '.', '3'},
-		{'4', '.', '.', '8', '.', '3', '.', '.', '1'},
-		{'7', '.', '.', '.', '2', '.', '.', '.', '6'},
-		{'.', '6', '.', '.', '.', '.', '2', '8', '.'},
-		{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
-		{'.', '.', '.', '.', '8', '.', '.', '7', '9'},
-	}
-
-	fmt.Println("Example 1:", isValidSudoku(board1)) // Output: true
-	fmt.Println("Example 2:", isValidSudoku(board2)) // Output: false
 }
